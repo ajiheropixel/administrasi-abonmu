@@ -1,0 +1,71 @@
+/* Print Styles */
+@media print {
+    /* Hide elements */
+    .no-print,
+    nav,
+    aside,
+    header,
+    footer,
+    .sidebar,
+    button,
+    .btn,
+    .alert {
+        display: none !important;
+    }
+    
+    /* Page setup */
+    @page {
+        size: A4;
+        margin: 1cm;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+        color: black;
+    }
+    
+    /* Typography */
+    * {
+        color: black !important;
+        background: white !important;
+    }
+    
+    /* Tables */
+    table {
+        page-break-inside: avoid;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    thead {
+        display: table-header-group;
+    }
+    
+    tr {
+        page-break-inside: avoid;
+    }
+    
+    /* Links */
+    a[href]:after {
+        content: none !important;
+    }
+    
+    /* Invoice specific */
+    .invoice-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    /* Force page breaks */
+    .page-break {
+        page-break-after: always;
+    }
+    
+    /* Avoid breaks */
+    .no-break {
+        page-break-inside: avoid;
+    }
+}
