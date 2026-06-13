@@ -129,9 +129,20 @@ class ReportApiController extends Controller
 
     /**
      * Download integrated report as PDF
+     * Mendukung token via query param ?token=... untuk akses dari browser (url_launcher)
      */
     public function downloadPdf(Request $request)
     {
+        // Autentikasi manual via query param token jika tidak ada Bearer header
+        if (!$request->user()) {
+            $token = $request->query('token');
+            if ($token) {
+                $pat = \Laravel\Sanctum\PersonalAccessToken::findToken($token);
+                if ($pat && $pat->tokenable) {
+                    \Auth::login($pat->tokenable);
+                }
+            }
+        }
         $startDate = $request->input('start_date', now()->startOfMonth()->format('Y-m-d'));
         $endDate = $request->input('end_date', now()->endOfMonth()->format('Y-m-d'));
 

@@ -45,6 +45,9 @@ Route::prefix('v1')->group(function () {
     // Public routes (no authentication required)
     Route::post('login', [AuthApiController::class, 'login']);
     
+    // Download PDF laporan — diakses langsung via browser (url_launcher), token via query param
+    Route::get('reports/integrated/download', [ReportApiController::class, 'downloadPdf']);
+    
     // Protected routes (authentication required)
     Route::middleware('auth:sanctum')->group(function () {
         
